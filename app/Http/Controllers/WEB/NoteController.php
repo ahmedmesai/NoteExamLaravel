@@ -38,7 +38,7 @@ class NoteController extends Controller
         $input['user_id'] = Auth::id();
         Note::create($input);
 
-        return redirect()->route('notes');
+        return redirect()->route('notes')->with('success', 'Note Added Successfully');
     }
 
 
@@ -67,7 +67,7 @@ class NoteController extends Controller
         $note->title = $request->title;
         $note->content = $request->content;
         $note->save();
-        return redirect()->route('notes');
+        return redirect()->route('notes')->with('success', 'Note Updated Successfully');
     }
 
 
@@ -75,6 +75,6 @@ class NoteController extends Controller
     {
         $note = Note::find($id);
         $note->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Note Deleted Successfully');
     }
 }

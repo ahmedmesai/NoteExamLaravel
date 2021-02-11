@@ -12,11 +12,21 @@
                 @method('PUT')
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" class="form-control @error('title') border-danger @enderror" placeholder="Title" name="title" value="{{$note->title}}">
+                    <input type="text" class="form-control @error('title') is-invalid  @enderror" placeholder="Title" name="title" value="{{$note->title}}">
+                    @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Content</label>
-                    <textarea class="form-control @error('title') border-danger @enderror" rows="6" placeholder="Content" name="content">{!! $note->content !!}</textarea>
+                    <textarea class="form-control @error('content')  is-invalid  @enderror" rows="6" placeholder="Content" name="content">{!! $note->content !!}</textarea>
+                    @error('content')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Update Note</button>
