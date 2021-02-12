@@ -45,6 +45,11 @@ class NoteController extends Controller
     public function show($id)
     {
         $note = Note::find($id);
+        if (is_null($note)) {
+            return redirect()->route('notes')->with('success', 'Do Not Found Note');
+        } else if ($note->user_id !== Auth::id()) {
+            return redirect()->route('notes')->with('success', 'You Do Not Have Right To Access This Note');
+        }
         return view('notes.show', compact('note'));
     }
 
@@ -52,6 +57,11 @@ class NoteController extends Controller
     public function edit($id)
     {
         $note = Note::find($id);
+        if (is_null($note)) {
+            return redirect()->route('notes')->with('success', 'Do Not Found Note');
+        } else if ($note->user_id !== Auth::id()) {
+            return redirect()->route('notes')->with('success', 'You Do Not Have Right To Update This Note');
+        }
         return view('notes.edit', compact('note'));
     }
 
